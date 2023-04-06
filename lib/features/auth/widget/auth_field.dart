@@ -5,7 +5,8 @@ class AuthField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
 
-  const AuthField({super.key,
+  const AuthField({
+    super.key,
     required this.controller,
     required this.hintText,
   });
@@ -13,8 +14,8 @@ class AuthField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
+      controller: controller,
+      decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5.0),
             borderSide: const BorderSide(
@@ -28,11 +29,10 @@ class AuthField extends StatelessWidget {
               color: Pallete.greyColor,
             ),
           ),
-              hintText: hintText,
+          hintText: hintText,
           hintStyle: const TextStyle(
             fontSize: 18,
-          )
-        ),
-      );
+          )),
+    );
   }
 }
