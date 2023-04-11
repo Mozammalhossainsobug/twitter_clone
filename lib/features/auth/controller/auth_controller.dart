@@ -10,24 +10,30 @@ import 'package:twitter_clone/models/user_model.dart';
 
 import '../../../core/utils.dart';
 
-final authControllerProvider = StateNotifierProvider<AuthController,bool>((ref) {
-  return AuthController(authAPI: ref.watch(authAPIProvider), userAPI: ref.watch(userAPIProvider),);
+final authControllerProvider = 
+  StateNotifierProvider<AuthController,bool>((ref) {
+  return AuthController(
+    authAPI: ref.watch(authAPIProvider), 
+    userAPI: ref.watch(userAPIProvider),
+    );
 });
 
-final currentUserAccountProvider = FutureProvider((ref) {
-    final authController = ref.watch(authControllerProvider.notifier);
-    return authController.currentUser();
-});
-
-final currentUserDetailsProvider = FutureProvider((ref) async {
+final currentUserDetailsProvider = FutureProvider((ref) {
   final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
   final userDetails = ref.watch(userDetailsProvider(currentUserId));
+  // print('print from currentUserDetailsProvider');
+  // print(userDetails.value);
   return userDetails.value;
 });
 
-final userDetailsProvider = FutureProvider.family((ref, String uid) async{
+final userDetailsProvider = FutureProvider.family((ref, String uid) {
   final authController = ref.watch(authControllerProvider.notifier);
   return authController.getUserData(uid);
+});
+
+final currentUserAccountProvider = FutureProvider((ref) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.currentUser();
 });
 
 class AuthController extends StateNotifier<bool> {
@@ -61,7 +67,7 @@ class AuthController extends StateNotifier<bool> {
         following: const [], 
         profilePic: '', 
         bannerPic: '', 
-        uid: ID.unique(), 
+        uid: r.$id,
         bio: '', 
         isTwitterBlue: false);
       final res2 = await _userAPI.saveUserData(userModel);

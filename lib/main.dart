@@ -22,12 +22,13 @@ class MyApp extends ConsumerWidget {
       home: ref.watch(currentUserAccountProvider).when(
         data: (user) {
           if(user != null) {
-            print(user.email);
-            print("Yes, login success");
+           // print(user.email);
+           // print(user.$id);
+           // print("Yes, login success");
            return const HomeView();
           }
           else {
-            print("Came to else part");
+            // print("Came to else part");
             return  SignUpView();
 
           }
