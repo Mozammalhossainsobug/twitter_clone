@@ -10,6 +10,19 @@ import 'package:twitter_clone/common/common.dart';
 import '../../../theme/pallete.dart';
 import '../widget/auth_field.dart';
 
+
+class EmailFieldValidator {
+  static String? validate(String value) {
+    return value.isEmpty ? "Email can't be empty!" : null;
+  }
+}
+
+class passwordValidator {
+  static String? passValidate(String value) {
+    return value.isEmpty ? "Please enter password!" : null;
+  }
+}
+
 class SignUpView extends ConsumerStatefulWidget {
   const SignUpView({Key? key}) : super(key: key);
 
@@ -38,6 +51,8 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
         email: emailController.text,
         password: passwordController.text,
         context: context);
+    EmailFieldValidator.validate(emailController.text);
+    passwordValidator.passValidate(passwordController.text);
   }
 
   @override
